@@ -20,9 +20,9 @@ namespace bc.infura.web3.Common
             if (Methods.Any(x => x == args.Method))
             {
                 string url = $"https://{NetworkUrl}.infura.io/{APIVersion}/{APIKey}";
-                var content = JsonContent.Create<T>(args);
-                var web = new HttpClient();
-                var res = await web.PostAsync(url, content);
+                using var content = JsonContent.Create<T>(args);
+                using var web = new HttpClient();
+                using var res = await web.PostAsync(url, content);
                 if (res != null)
                 {
                     var responseContent = await res.Content.ReadFromJsonAsync<U>();
