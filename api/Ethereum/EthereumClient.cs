@@ -5,6 +5,7 @@ namespace infura.web3.Ethereum
 {
     public sealed class EthereumClient : RPCClient
     {
+        QuantityEncoder enc = new QuantityEncoder();
         const string defaultNetwork = "mainnet";
         public EthereumClient(string networkUrl = defaultNetwork)
         {
@@ -14,19 +15,27 @@ namespace infura.web3.Ethereum
 
         public async Task<string> GetChainId()
         {
-            var args = new GetChainIdRequestBody();
-
-            var resp = await CallAsync<GetChainIdRequestBody, GetChainIdResponseBody>(args);
+            var resp = await CallAsync<GetChainIdRequestBody, GetGasPriceResponseBody>(new GetChainIdRequestBody());
             if (resp != null)
             {
                 return resp.Result;
             }
-            throw new InvalidOperationException("GetChainId");
+            throw new InvalidOperationException(nameof(GetChainId));
+        }
+
+        public async Task<long> GetGasPrice()
+        {
+            var resp = await CallAsync<GetGasPriceRequestBody, GetGasPriceResponseBody>(new GetGasPriceRequestBody());
+            if (resp != null)
+            {
+                return enc.FromHex(resp.Result);
+            }
+            throw new InvalidOperationException(nameof(GetGasPrice));
         }
 
         protected override void Dispose()
         {
-           // do nothing yet.
+           // nothing to dispose of yet.
         }
     }
 }

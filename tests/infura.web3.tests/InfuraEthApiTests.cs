@@ -4,8 +4,9 @@ using System.Diagnostics;
 namespace infura.web3.tests
 {
     [TestClass]
-    public class InfuraEthApiTests
+    public class InfuraEthMainApiTests
     {
+        QuantityEncoder enc = new QuantityEncoder();
         [TestInitialize]
         public void TestInitOperations()
         {
@@ -30,6 +31,18 @@ namespace infura.web3.tests
             var resp = await cl.GetChainId();
             Assert.IsNotNull(resp);
             Debug.WriteLine(resp);
+
+        }
+
+        // Check gas price
+        [TestMethod]
+        public async Task GetGasPriceOnMainnetTest()
+        {
+            var cl = new EthereumClient();
+            var resp = await cl.GetGasPrice();
+            Assert.IsNotNull(resp);
+            Debug.WriteLine(resp);
+            Debug.WriteLine(enc.WeiToGwei(resp));
         }
     }
 }
