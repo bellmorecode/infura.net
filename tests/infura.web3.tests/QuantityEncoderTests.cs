@@ -1,4 +1,4 @@
-namespace infura.web3.tests
+namespace bc.infura.web3.tests
 {
     [TestClass]
     public class QuantityEncoderTests

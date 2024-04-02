@@ -1,5 +1,4 @@
-﻿using infura.web3.Common;
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
 
 namespace bc.infura.web3.Common
 {

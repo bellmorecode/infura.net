@@ -8,14 +8,14 @@ namespace bc.infura.web3
 {
     public sealed class QuantityEncoder
     {
-        public double WeiToGwei(long value)
+        public double WeiToGwei(double value)
         {
             return value / 1000000000.000000;
         }
 
-        public long GweiToWei(double value)
+        public double GweiToWei(double value)
         {
-            return (long)Math.Ceiling(value * 1000000000.00);
+            return value * 1000000000.000000;
         }
 
         public string ToHex(long value)

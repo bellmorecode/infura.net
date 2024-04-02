@@ -1,6 +1,4 @@
-﻿using infura.web3.Common;
-using System.Text.Json.Serialization;
-
+﻿using bc.infura.web3.Common;
 namespace bc.infura.web3.Ethereum
 {
     public class GetChainIdResponseBody : ResponseBodyBase { }
