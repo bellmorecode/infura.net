@@ -44,5 +44,28 @@ namespace bc.infura.web3.tests
             Debug.WriteLine(resp);
             Debug.WriteLine(enc.WeiToGwei(resp));
         }
+
+        // Check gas price
+        [TestMethod]
+        public async Task GetBalanceTest()
+        {
+            const string acc1 = "0x297822f860890459d733E30a141F4436c8bDb5C6";
+            var cl = new EthereumClient();
+            var resp = await cl.GetBalance(acc1);
+            Assert.IsNotNull(resp);
+            Debug.WriteLine(resp);
+            Debug.WriteLine(enc.WeiToGwei(resp));
+        }
+
+        [TestMethod]
+        public async Task GetSepoBalanceTest()
+        {
+            const string acc1 = "0x06Bbe2727cb099dc769B0eD48e109Fde69dE824A";
+            var cl = new EthereumClient("sepolia");
+            var resp = await cl.GetBalance(acc1);
+            Assert.IsNotNull(resp);
+            Debug.WriteLine(resp);
+            Debug.WriteLine(enc.WeiToGwei(resp));
+        }
     }
 }

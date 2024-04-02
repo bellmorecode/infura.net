@@ -33,6 +33,16 @@ namespace bc.infura.web3.Ethereum
             throw new InvalidOperationException(nameof(GetGasPrice));
         }
 
+        public async Task<double> GetBalance(string address)
+        {
+            var resp = await GenericCallAsync<GetBalanceRequestBody, GetBalanceResponseBody>(new GetBalanceRequestBody(address));
+            if (resp != null)
+            {
+                return enc.FromHex(resp.Result);
+            }
+            throw new InvalidOperationException(nameof(GetBalance));
+        }
+
         protected async Task<TOutput> GenericCallAsync<TInput, TOutput>(TInput args) where TInput : RequestBodyBase, new()
                                                                                      where TOutput : ResponseBodyBase, new()
         {
