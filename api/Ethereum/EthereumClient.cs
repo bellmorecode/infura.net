@@ -1,9 +1,9 @@
 ﻿using bc.infura.web3.Ethereum;
-using infura.web3.Common;
+using bc.infura.web3.Common;
 
-namespace infura.web3.Ethereum
+namespace bc.infura.web3.Ethereum
 {
-    public sealed class EthereumClient : RPCClient
+    public class EthereumClient : RPCClient
     {
         QuantityEncoder enc = new QuantityEncoder();
         const string defaultNetwork = "mainnet";
@@ -15,7 +15,7 @@ namespace infura.web3.Ethereum
 
         public async Task<string> GetChainId()
         {
-            var resp = await CallAsync<GetChainIdRequestBody, GetGasPriceResponseBody>(new GetChainIdRequestBody());
+            var resp = await GenericCallAsync<GetChainIdRequestBody, GetGasPriceResponseBody>(new GetChainIdRequestBody());
             if (resp != null)
             {
                 return resp.Result;
@@ -23,14 +23,21 @@ namespace infura.web3.Ethereum
             throw new InvalidOperationException(nameof(GetChainId));
         }
 
-        public async Task<long> GetGasPrice()
+        public async Task<double> GetGasPrice()
         {
-            var resp = await CallAsync<GetGasPriceRequestBody, GetGasPriceResponseBody>(new GetGasPriceRequestBody());
+            var resp = await GenericCallAsync<GetGasPriceRequestBody, GetGasPriceResponseBody>(new GetGasPriceRequestBody());
             if (resp != null)
             {
                 return enc.FromHex(resp.Result);
             }
             throw new InvalidOperationException(nameof(GetGasPrice));
+        }
+
+        protected async Task<TOutput> GenericCallAsync<TInput, TOutput>(TInput args) where TInput : RequestBodyBase, new()
+                                                                                     where TOutput : ResponseBodyBase, new()
+        {
+            // TODO: add validation
+            return await CallAsync<TInput, TOutput>(args);
         }
 
         protected override void Dispose()

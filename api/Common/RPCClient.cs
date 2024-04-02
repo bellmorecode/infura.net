@@ -1,6 +1,7 @@
-﻿using System.Net.Http.Json;
+﻿using infura.web3.Common;
+using System.Net.Http.Json;
 
-namespace infura.web3.Common
+namespace bc.infura.web3.Common
 {
 
     public abstract class RPCClient : IRPCClient

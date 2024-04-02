@@ -1,4 +1,4 @@
-﻿namespace infura.web3
+﻿namespace bc.infura.web3
 {
     public class JSONRPCErrorCode
     {

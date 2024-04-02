@@ -1,7 +1,7 @@
-﻿using infura.web3.Ethereum;
+﻿using bc.infura.web3.Ethereum;
 using System.Diagnostics;
 
-namespace infura.web3.tests
+namespace bc.infura.web3.tests
 {
     [TestClass]
     public class InfuraEthMainApiTests

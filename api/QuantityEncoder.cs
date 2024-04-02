@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace infura.web3
+namespace bc.infura.web3
 {
     public sealed class QuantityEncoder
     {

@@ -1,4 +1,4 @@
-﻿namespace infura.web3.Common
+﻿namespace bc.infura.web3.Common
 {
     public interface IRPCClient : IDisposable
     {
